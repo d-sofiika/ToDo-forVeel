@@ -1,37 +1,39 @@
 import { useState } from "react";
 import css from "./NewToDo.module.css";
-import { postToDo } from "../../api";
+import { addTask } from "../../redux/api";
 import Loader from "../Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { selectError, selectLoading } from "../../redux/selectors";
 
-export default function NewToDo({ setTodos }) {
+export default function NewToDo() {
   const [newTask, setNewTask] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (newTask.trim()) {
       const newTodo = {
         title: newTask,
         completed: false,
       };
-      try {
-        setLoading(true);
-        const addedTask = await postToDo("todos", newTodo);
-        setTodos((prevTodos) => [addedTask, ...prevTodos]);
-        setNewTask("");
-      } catch (error) {
-        setError("Failed to add task:", error);
-      } finally {
-        setLoading(false);
-      }
+
+      dispatch(addTask(newTodo));
+      setNewTask("");
     }
   };
 
   return (
     <div className={css.newToDoContainer}>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="newTask" placeholder="New task"   onChange={(e) => setNewTask(e.target.value)} />
+        <input
+          type="text"
+          name="newTask"
+          placeholder="New task"
+          onChange={(e) => setNewTask(e.target.value)}
+        />
         <button>Add new task</button>
       </form>
       {loading && <Loader />}
