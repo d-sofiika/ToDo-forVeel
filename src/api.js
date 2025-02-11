@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const url = 'https://jsonplaceholder.typicode.com/todos';
+const url = 'https://jsonplaceholder.typicode.com';
 
 
-export const getToDo = async (endpoint, params = {limit: 10}) => {
+export const getToDo = async(endpoint = 'todos', limit = 10) => {
   try {
-    const response = await axios.get(`${url}${endpoint}`, {
-      params
+    const response = await axios.get(`${url}/${endpoint}`, {
+       params: { _limit: limit },
     });
 
     return response.data;
@@ -15,9 +15,9 @@ export const getToDo = async (endpoint, params = {limit: 10}) => {
   }
 };
 
-export const postMovie = async (endpoint,data = {}) => {
+export const postMovie = async (endpoint = 'todos',data = {}) => {
   try {
-    const response = await axios.post(`${url}${endpoint}`, data);
+    const response = await axios.post(`${url}/${endpoint}`, data);
    
     return response.data;
     
