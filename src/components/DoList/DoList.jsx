@@ -1,10 +1,10 @@
 import css from "./DoList.module.css";
-import { getToDo } from "../../api.js";
+import { deleteToDo, getToDo } from "../../api.js";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader.jsx";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-export default function DoList() {
-  const [todos, setTodos] = useState([]);
+export default function DoList({ todos, setTodos }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -31,10 +31,25 @@ export default function DoList() {
       )
     );
   };
+
+  const handleDelete = async (id) => {
+    try {
+      setLoading(true);
+      await deleteToDo("todos", id);
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      setError("Failed to delete task:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={css.vehicleListContainer}>
-      {loading && <Loader active={loading} />}
+
+      {loading && <Loader />}
       {error && <p>{error}</p>}
+
       {todos.length > 0 && !loading && !error && (
         <ul className={css.list}>
           {todos.map((todo) => (
@@ -43,10 +58,14 @@ export default function DoList() {
               <div>
                 <input
                   type="checkbox"
+                  id={todo.id}
                   checked={todo.completed}
                   onChange={() => handleChange(todo.id)}
                 />
-                <label>{todo.title}</label>
+                <label htmlFor={todo.id}>{todo.title}</label>
+                <button type="button" onClick={() => handleDelete(todo.id)}>
+                  <IoIosCloseCircleOutline />
+                </button>
               </div>
             </li>
           ))}
