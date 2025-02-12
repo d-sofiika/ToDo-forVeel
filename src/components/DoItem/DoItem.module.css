@@ -1,0 +1,61 @@
+.item {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.input {
+  display: none;
+}
+.label {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: #3f3f3f6a;
+  color: white;
+  padding: 16px 18px;
+transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  width: 100%;
+  cursor: pointer;
+}
+.label:hover.completed {
+  color: #4caf50;
+}
+.label:hover.notCompleted {
+  color: #e53935;
+}
+.completed {
+  border-color: #4caf50;
+}
+
+.notCompleted {
+  border-color: #e53935;
+}
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: background-color 0.3s;
+}
+
+.completedCircle {
+  background-color: #4caf50;
+}
+
+.notCompletedCircle {
+  background-color: #e53935;
+}
+
+.btn {
+  fill: white;
+  width: 20px;
+  height: 20px;
+  transition: fill 0.3s;
+}
+.btn:hover,
+.btn:focus {
+  fill: #e53935;
+}

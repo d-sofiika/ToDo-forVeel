@@ -1,3 +1,28 @@
-.color{
-    color: #333;
+.vehicleListContainer{
+display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+.btn {
+font-weight: 400;
+    font-size: 16px;
+    line-height: 137%;
+    color: #fff;
+
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 16px 18px;
+transition: border-color 0.3s;
+}
+
+.btn:hover,
+.btn:focus {
+border-color: rgb(129, 129, 133);
 }

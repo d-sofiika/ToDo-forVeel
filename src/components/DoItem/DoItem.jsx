@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import css from "./DoItem.module.css";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { MdDeleteOutline } from "react-icons/md";
 import { deleteTask } from "../../redux/api";
 import { toggleTask } from "../../redux/paginationSlice.js";
 
@@ -15,22 +15,32 @@ export default function DoItem({ todo }) {
     dispatch(deleteTask(todo.id));
   };
   return (
-    <div className={css.loadingContainer}>
-      <li key={todo.id} className={css.item}>
-        <h3>{`Task #${todo.id}`}</h3>
-        <div>
-          <input
-            type="checkbox"
-            id={todo.id}
-            checked={todo.completed}
-            onChange={handleChange}
-          />
-          <label htmlFor={todo.id}>{todo.title}</label>
-          <button type="button" onClick={handleDelete}>
-            <IoIosCloseCircleOutline />
-          </button>
-        </div>
-      </li>
-    </div>
+    <li key={todo.id} className={css.item}>
+      <input
+        className={css.input}
+        type="checkbox"
+        id={todo.id}
+        checked={todo.completed}
+        onChange={handleChange}
+      />
+      <span
+        className={`${css.circle} ${
+          todo.completed ? css.completedCircle : css.notCompletedCircle
+        }`}
+      ></span>
+
+      <label
+        className={`${css.label} ${
+          todo.completed ? css.completed : css.notCompleted
+        }`}
+        htmlFor={todo.id}
+      >
+        {todo.title}
+      </label>
+
+      <button type="button" onClick={handleDelete}>
+        <MdDeleteOutline className={css.btn} />
+      </button>
+    </li>
   );
 }

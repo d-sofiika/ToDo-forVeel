@@ -22,16 +22,13 @@ export default function NewToDo() {
       };
 
       dispatch(addTask(newTodo));
-
       setNewTask("");
-      console.log(newTask)
-      console.log('newTodo', newTodo)
     }
   };
 
   return (
    
-      <form onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input className={css.input}
           type="text"
           name="newTask"
@@ -41,7 +38,7 @@ export default function NewToDo() {
         />
       <button className={css.btn}>Add new task</button>
        {loading && <Loader />}
-      {error && <p>{error}</p>}
+      {error && <p>Opps!</p>}
       </form>
      
   

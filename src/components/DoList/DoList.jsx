@@ -37,7 +37,7 @@ export default function DoList() {
           ))}
         </ul>
       )}
-      <button type="button" onClick={handleMore}>
+      <button className={css.btn} type="button" onClick={handleMore}>
         Load more
       </button>
     </div>
