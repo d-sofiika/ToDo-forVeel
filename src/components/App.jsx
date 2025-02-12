@@ -5,10 +5,10 @@ import NewToDo from "./NewToDo/NewToDo";
 function App() {
   const [todos, setTodos] = useState([]);
   return (
-    <>
+    <div className="section">
       <NewToDo setTodos={setTodos}/>
       <DoList todos={todos} setTodos={setTodos} />
-    </>
+    </div>
   );
 }
 

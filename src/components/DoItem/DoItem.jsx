@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import css from "./DoItem.module.css";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { deleteTask } from "../../redux/api";
-import { toggleTask } from "../../redux/slices/paginationSlice.js";
+import { toggleTask } from "../../redux/paginationSlice.js";
 
 export default function DoItem({ todo }) {
   const dispatch = useDispatch();

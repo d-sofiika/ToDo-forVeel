@@ -16,28 +16,34 @@ export default function NewToDo() {
     event.preventDefault();
     if (newTask.trim()) {
       const newTodo = {
+        id: Date.now(),
         title: newTask,
         completed: false,
       };
 
       dispatch(addTask(newTodo));
+
       setNewTask("");
+      console.log(newTask)
+      console.log('newTodo', newTodo)
     }
   };
 
   return (
-    <div className={css.newToDoContainer}>
+   
       <form onSubmit={handleSubmit}>
-        <input
+        <input className={css.input}
           type="text"
           name="newTask"
-          placeholder="New task"
+        placeholder="New task"
+        value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <button>Add new task</button>
-      </form>
-      {loading && <Loader />}
+      <button className={css.btn}>Add new task</button>
+       {loading && <Loader />}
       {error && <p>{error}</p>}
-    </div>
+      </form>
+     
+  
   );
 }
