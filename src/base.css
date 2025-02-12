@@ -75,10 +75,7 @@ button {
   padding: 0;
 }
 
-input:focus {
-  outline: none;
-  border: none;
-}
+
 .section {
   padding: 60px 30px;
 }

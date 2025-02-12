@@ -2,23 +2,26 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  max-width: 535px;
 }
 
 .input {
   display: none;
 }
 .label {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+  display: block;
   border: 2px solid #ccc;
   border-radius: 12px;
   background-color: #3f3f3f6a;
   color: white;
   padding: 16px 18px;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-  width: 100%;
+  width: 490px;
+
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .label:hover.completed {
   color: #4caf50;
