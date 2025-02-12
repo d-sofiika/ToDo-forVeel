@@ -6,7 +6,7 @@ export default function Loader({active}) {
   return (
     <div className={css.loadingContainer}>
         <PropagateLoader
-          color="blue"
+          color="white"
           loading={active}
           size={30}
           aria-label="Loading..."

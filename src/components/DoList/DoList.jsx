@@ -1,9 +1,8 @@
 import css from "./DoList.module.css";
 import { useEffect } from "react";
-import Loader from "../Loader/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectError,
+  selectHasMore,
   selectLoading,
   selectPage,
   selectTodos,
@@ -15,31 +14,43 @@ export default function DoList() {
   const dispatch = useDispatch();
   const todos = useSelector(selectTodos);
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
   const currentPage = useSelector(selectPage);
+  const hasMore = useSelector(selectHasMore);
 
   useEffect(() => {
-    dispatch(fetchTasks({ page: 1 }));
-  }, [dispatch]);
+    if (todos.length === 0) {
+      dispatch(fetchTasks({ page: 1 }));
+    }
+  }, [dispatch, todos.length]);
 
   const handleMore = () => {
-    dispatch(fetchTasks({ page: currentPage + 1 }));
+   if (!loading && hasMore) {
+      dispatch(fetchTasks({ page: currentPage + 1 }));
+    }
   };
-
+ 
   return (
     <div className={css.vehicleListContainer}>
-      {loading && <Loader />}
-      {error && <p>{error}</p>}
-      {todos.length > 0 && !loading && !error && (
+      {todos.length > 0 && (
         <ul className={css.list}>
           {todos.map((todo) => (
             <DoItem key={todo.id} todo={todo} />
           ))}
         </ul>
       )}
-      <button className={css.btn} type="button" onClick={handleMore}>
-        Load more
-      </button>
+      {hasMore ? (
+        <button
+          className={css.btn}
+          type="button"
+          onClick={handleMore}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Load More"}
+        </button>
+      ): (
+        <p>No tasks available.</p>
+      )}
+     
     </div>
   );
 }

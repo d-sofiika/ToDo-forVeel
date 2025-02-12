@@ -17,11 +17,11 @@ const saveState = (state) => {
   );
 };
 const handlePending = (state) => {
-  state.isLoading = true;
+  state.loading = true;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
+  state.loading = false;
   state.error = action.payload;
 };
 
@@ -40,6 +40,7 @@ const todosSlice = createSlice({
     error: null,
     page: 1,
     fetched: false,
+    hasMore: true,
   },
   reducers: {
     toggleTask: (state, action) => {
@@ -70,6 +71,8 @@ const todosSlice = createSlice({
         state.todos = uniqueTodos;
         state.fetched = true;
         state.page = action.payload.page;
+
+        state.hasMore = action.payload.data.length > 0;
         updateState(state);
       })
       .addCase(fetchTasks.rejected, handleRejected)

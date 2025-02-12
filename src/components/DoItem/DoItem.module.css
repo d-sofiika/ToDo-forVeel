@@ -16,7 +16,7 @@
   background-color: #3f3f3f6a;
   color: white;
   padding: 16px 18px;
-transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   width: 100%;
   cursor: pointer;
 }
